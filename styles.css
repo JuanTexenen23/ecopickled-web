@@ -1,0 +1,155 @@
+/* ==========================================================================
+   ESTILOS PERSONALIZADOS DUALES — EcoPickLed
+   ========================================================================== */
+
+/* Tarjetas ODS */
+.ods-card {
+    background-color: #ffffff;
+    border-width: 1px;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.dark .ods-card {
+    background-color: rgba(15, 23, 42, 0.9);
+    box-shadow: none;
+}
+
+.ods-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.ods-badge {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+    margin: 0 auto 1rem auto;
+}
+
+/* Tarjetas del simulador */
+.shelf-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 12rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.dark .shelf-card {
+    background-color: rgba(15, 23, 42, 0.7);
+    border-color: #1e293b;
+    box-shadow: none;
+}
+
+/* Tiras LED apagadas y encendidas */
+.led-bar-off {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.5rem;
+    background-color: #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.dark .led-bar-off {
+    background-color: #1e293b;
+}
+
+.led-bar-active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.5rem;
+    background-color: #2E7D32;
+    box-shadow: 0 0 12px #2E7D32, 0 0 20px #00D2FF;
+    transition: all 0.3s ease;
+}
+
+.dark .led-bar-active {
+    background-color: #10b981;
+    box-shadow: 0 0 15px #10b981, 0 0 25px #00FF87;
+}
+
+/* Botones de las estanterías */
+.shelf-btn-disabled {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #f1f5f9;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    border: 1px solid #e2e8f0;
+    cursor: not-allowed;
+}
+
+.dark .shelf-btn-disabled {
+    background-color: #1e293b;
+    color: #64748b;
+    border-color: #334155;
+}
+
+.shelf-btn-active {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #2E7D32;
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+    transition: all 0.2s ease;
+}
+
+.dark .shelf-btn-active {
+    background-color: #10b981;
+    color: #000000;
+}
+
+/* Campos de Formulario */
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-size: 0.875rem;
+    transition: border-color 0.3s ease;
+}
+
+.dark .form-input {
+    background-color: #0f172a;
+    border-color: #1e293b;
+    color: #ffffff;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #2E7D32;
+}
+
+.dark .form-input:focus {
+    border-color: #10b981;
+}

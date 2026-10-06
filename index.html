@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoPickLed — Soluciones de Logística Inteligente Sostenible</title>
+    
+    <!-- Recurso Online: Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        logoEco: '#2E7D32',       /* Verde "Eco" y Hoja del logo */
+                        logoPick: '#0F4C81',      /* Azul "PickLed" del logo */
+                        logoCyan: '#00D2FF',      /* Azul Cyan destello LED */
+                        logoLeaf: '#7CB342',      /* Verde claro hoja eco */
+                        bgLight: '#F8FAF9',       /* Fondo general claro corporativo */
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Recursos Online: FontAwesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Archivo CSS Personalizado Local -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-bgLight dark:bg-[#0B0F17] text-slate-800 dark:text-slate-100 antialiased font-sans transition-colors duration-300">
+
+    <!-- ========================================== -->
+    <!-- 1. BARRA DE NAVEGACIÓN (NAVBAR)            -->
+    <!-- ========================================== -->
+    <nav class="fixed w-full z-50 bg-white/90 dark:bg-[#0B0F17]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logotipo Oficial -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <img src="Logo.jpg" alt="EcoPickLed Logo" class="h-14 w-auto object-contain transition-transform group-hover:scale-105" onerror="this.onerror=null; this.src='https://via.placeholder.com/180x50/ffffff/0f4c81?text=EcoPickLed';">
+                </a>
+
+                <!-- Menú Navegación Escritorio -->
+                <div class="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                    <a href="#inicio" class="hover:text-logoEco dark:hover:text-emerald-400 transition-colors">Inicio</a>
+                    <a href="#canvas" class="hover:text-logoEco dark:hover:text-emerald-400 transition-colors">Modelo Canvas</a>
+                    <a href="#simulador" class="hover:text-logoEco dark:hover:text-emerald-400 transition-colors">Simulador LED</a>
+                    <a href="#ods" class="hover:text-logoEco dark:hover:text-emerald-400 transition-colors">ODS & Sostenibilidad</a>
+                    <a href="#calculadora" class="hover:text-logoEco dark:hover:text-emerald-400 transition-colors">Calculadora ROI</a>
+                    <a href="#contacto" class="bg-gradient-to-r from-logoEco to-logoPick text-white px-4 py-2 rounded-full shadow-md shadow-logoEco/20 hover:opacity-90 transition-all">Solicitar Demo</a>
+                    
+                    <!-- BOTÓN DE CAMBIO DE TEMA / VERSIÓN -->
+                    <button id="theme-toggle-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-xs font-mono font-bold cursor-pointer">
+                        <i id="theme-icon" class="fa-solid fa-moon text-amber-500"></i>
+                        <span id="theme-text">Modo Oscuro</span>
+                    </button>
+                </div>
+
+                <!-- Botón Menú Móvil -->
+                <div class="flex items-center gap-2 md:hidden">
+                    <button id="theme-toggle-btn-mobile" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700">
+                        <i class="fa-solid fa-moon text-amber-500"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-700 dark:text-slate-300 hover:text-logoEco p-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" class="block py-2 text-slate-700 dark:text-slate-300 hover:text-logoEco">Inicio</a>
+            <a href="#canvas" class="block py-2 text-slate-700 dark:text-slate-300 hover:text-logoEco">Modelo Canvas</a>
+            <a href="#simulador" class="block py-2 text-slate-700 dark:text-slate-300 hover:text-logoEco">Simulador LED</a>
+            <a href="#ods" class="block py-2 text-slate-700 dark:text-slate-300 hover:text-logoEco">ODS & Sostenibilidad</a>
+            <a href="#calculadora" class="block py-2 text-slate-700 dark:text-slate-300 hover:text-logoEco">Calculadora ROI</a>
+            <a href="#contacto" class="block py-2 text-slate-700 dark:text-slate-300 hover:text-logoEco">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- 2. SECCIÓN HERO (PORTADA PRINCIPAL)         -->
+    <!-- ========================================== -->
+    <section id="inicio" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-b from-emerald-50/50 via-sky-50/30 to-bgLight dark:from-[#0B0F17] dark:to-[#0B0F17]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Texto de Bienvenida -->
+                <div>
+                    <div class="inline-flex items-center space-x-2 bg-emerald-100/80 dark:bg-emerald-500/10 border border-emerald-300 dark:border-emerald-500/30 rounded-full px-4 py-1.5 mb-6">
+                        <span class="w-2.5 h-2.5 rounded-full bg-logoEco dark:bg-emerald-400 animate-ping"></span>
+                        <span class="text-xs font-bold text-logoEco dark:text-emerald-400 uppercase tracking-wider font-mono">CFGS Mantenimiento Electrónico — Proyecto EIE</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                        <span class="text-logoEco dark:text-emerald-400">Eco</span><span class="text-logoPick dark:text-sky-400">PickLed</span>
+                        <span class="block text-2xl sm:text-3xl lg:text-4xl text-slate-700 dark:text-slate-300 font-bold mt-2">Logística Inteligente y Sostenible</span>
+                    </h1>
+                    
+                    <p class="mt-6 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Sistema <strong>Pick-to-Light</strong> que combina hardware electrónico de bajo consumo y gestión SGA en la nube. Aumenta la velocidad de empaquetado, elimina el 90% de errores humanos y reduce tu huella ecológica.
+                    </p>
+
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        <a href="#simulador" class="inline-flex justify-center items-center px-6 py-3.5 rounded-xl font-bold text-white bg-logoEco hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 shadow-lg shadow-logoEco/20 transition-all">
+                            <i class="fa-solid fa-play mr-2"></i> Probar Simulador LED
+                        </a>
+                        <a href="#calculadora" class="inline-flex justify-center items-center px-6 py-3.5 rounded-xl font-bold text-logoPick dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 shadow-sm transition-all">
+                            <i class="fa-solid fa-calculator mr-2 text-logoCyan"></i> Calcular Ahorro Anual
+                        </a>
+                    </div>
+
+                    <!-- Métricas Destacadas -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 mt-8 border-t border-slate-200 dark:border-slate-800">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold font-mono text-logoEco dark:text-emerald-400">-90%</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold mt-1">Errores de Picking</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold font-mono text-logoPick dark:text-sky-400">+35%</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold mt-1">Velocidad Operativa</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold font-mono text-logoLeaf dark:text-lime-400">100%</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold mt-1">Sostenible sin Papel</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulación Estantería Animada -->
+                <div class="relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-logoEco to-logoPick rounded-3xl blur-xl opacity-20"></div>
+                    <div class="relative bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 shadow-xl dark:shadow-2xl">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-700">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-red-400"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                            </div>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-mono"><i class="fa-solid fa-wifi text-logoEco dark:text-emerald-400 mr-1"></i> SGA Cloud Sync: ONLINE</span>
+                        </div>
+                        
+                        <div class="mt-6 space-y-4 font-mono">
+                            <div class="p-4 rounded-xl bg-emerald-50/80 dark:bg-slate-900/90 border border-emerald-300 dark:border-emerald-500/50 flex items-center justify-between shadow-sm">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 rounded-full bg-logoEco dark:bg-emerald-400 animate-pulse shadow-md"></div>
+                                    <span class="text-sm font-bold text-slate-800 dark:text-emerald-300">ESTANTERÍA A-12</span>
+                                </div>
+                                <span class="bg-logoEco dark:bg-emerald-500/20 text-white dark:text-emerald-300 text-xs px-3 py-1 rounded-md font-bold dark:border dark:border-emerald-500/40">RECOGER 3 UNID.</span>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 flex items-center justify-between opacity-60">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-700"></div>
+                                    <span class="text-sm text-slate-600 dark:text-slate-400">ESTANTERÍA A-13</span>
+                                </div>
+                                <span class="text-slate-400 dark:text-slate-500 text-xs">EN ESPERA</span>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-sky-50/80 dark:bg-slate-900/50 border border-sky-200 dark:border-slate-800 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-4 h-4 rounded-full bg-logoPick dark:bg-sky-400 shadow-md"></div>
+                                    <span class="text-sm text-slate-800 dark:text-slate-300">ESTANTERÍA A-14</span>
+                                </div>
+                                <span class="bg-logoPick dark:bg-sky-500/20 text-white dark:text-sky-300 text-xs px-3 py-1 rounded-md font-bold dark:border dark:border-sky-500/40">SIGUIENTE PASO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. PROPUESTA DE VALOR (MODELO CANVAS)      -->
+    <!-- ========================================== -->
+    <section id="canvas" class="py-20 bg-white dark:bg-slate-950/60 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold tracking-widest text-logoEco dark:text-emerald-400 uppercase mb-2">SOLUCIÓN CANVAS EIE</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Propuesta de Valor Principal</p>
+                <p class="text-slate-600 dark:text-slate-400 mt-3">Infraestructura técnica para la gestión integral de almacenes e industria 4.0.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-bgLight dark:bg-slate-900/80 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-logoEco dark:hover:border-emerald-500/50 transition-all duration-300 transform hover:-translate-y-2 group shadow-sm">
+                    <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-logoEco dark:text-emerald-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Eficiencia Operativa</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                        Localización visual inmediata mediante LEDs RGB de alta intensidad. El operario encuentra el producto al instante sin perder tiempo leyendo códigos.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-700 dark:text-slate-300 space-y-2 border-t border-slate-200 dark:border-slate-800 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-logoEco dark:text-emerald-400 mr-2"></i> Guiado por letreros luminosos</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-logoEco dark:text-emerald-400 mr-2"></i> Optimización de rutas de paso</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-bgLight dark:bg-slate-900/80 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-logoPick dark:hover:border-sky-500/50 transition-all duration-300 transform hover:-translate-y-2 group shadow-sm">
+                    <div class="w-14 h-14 rounded-xl bg-sky-100 dark:bg-sky-500/10 border border-sky-200 dark:border-sky-500/30 flex items-center justify-center text-logoPick dark:text-sky-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Precisión Drástica</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                        Reducción drástica de errores humanos en la búsqueda de productos. Confirmación física por pulsador o sensor infrarrojo en balda.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-700 dark:text-slate-300 space-y-2 border-t border-slate-200 dark:border-slate-800 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-logoPick dark:text-sky-400 mr-2"></i> Confirmación táctil/óptica</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-logoPick dark:text-sky-400 mr-2"></i> Menos de 1 error al mes</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-bgLight dark:bg-slate-900/80 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-logoLeaf dark:hover:border-amber-400/50 transition-all duration-300 transform hover:-translate-y-2 group shadow-sm">
+                    <div class="w-14 h-14 rounded-xl bg-lime-100 dark:bg-amber-500/10 border border-lime-200 dark:border-amber-500/30 flex items-center justify-center text-logoLeaf dark:text-amber-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Control SGA Integral</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                        Software Cloud SGA con control de existencias, registro de operarios y trazabilidad completa de palés en tiempo real.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-700 dark:text-slate-300 space-y-2 border-t border-slate-200 dark:border-slate-800 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-logoLeaf dark:text-amber-400 mr-2"></i> Trazabilidad total de palés</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-logoLeaf dark:text-amber-400 mr-2"></i> API integrable con ERPs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 4. SIMULADOR EN VIVO PICK-TO-LIGHT          -->
+    <!-- ========================================== -->
+    <section id="simulador" class="py-20 bg-bgLight dark:bg-[#0B0F17] relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/10 text-logoEco dark:text-emerald-400 text-xs font-mono font-bold border border-emerald-200 dark:border-emerald-500/30 uppercase tracking-widest">
+                    DEMO EN TIEMPO REAL
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">Simulador Pick-to-Light</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2">Haz clic en <strong>"Lanzar Orden de Picking"</strong> para ver cómo se encienden los módulos LED de la estantería.</p>
+            </div>
+
+            <!-- Panel Contenedor del Simulador -->
+            <div class="bg-white dark:bg-slate-800/90 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700/80 max-w-5xl mx-auto shadow-xl dark:shadow-2xl">
+                <!-- Barra de Estado y Botones -->
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-700">
+                    <div>
+                        <div class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-logoEco dark:text-emerald-400"></i> Pedido Activo: <span id="order-id-display" class="font-mono text-logoPick dark:text-sky-400">ORD-#8942</span>
+                        </div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" id="order-status-text">Estado: Esperando inicio de pedido</div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <button id="btn-start-pick" class="px-5 py-2.5 rounded-lg bg-logoEco hover:bg-emerald-800 dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white dark:text-black font-bold text-sm shadow-md transition-all cursor-pointer">
+                            <i class="fa-solid fa-play mr-1.5"></i> Lanzar Orden de Picking
+                        </button>
+                        <button id="btn-reset-pick" class="px-4 py-2.5 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-semibold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-300 dark:border-slate-700 cursor-pointer">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> Reiniciar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rejilla de 6 Estanterías Simuladas -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
+                    <!-- Balda 1 -->
+                    <div id="shelf-1" class="shelf-card">
+                        <div id="led-bar-1" class="led-bar-off"></div>
+                        <div class="flex justify-between items-start mt-2">
+                            <div>
+                                <span class="text-xs font-mono text-slate-400">UBICACIÓN A-1</span>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Tornillos M6 Inox</h4>
+                            </div>
+                            <span class="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700" id="indicator-dot-1"></span>
+                        </div>
+                        <div class="my-3 flex items-center justify-between bg-slate-100 dark:bg-black/60 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <div class="text-xs font-mono text-slate-500 dark:text-slate-400">CANTIDAD:</div>
+                            <div id="display-num-1" class="font-mono text-2xl font-extrabold text-slate-400 dark:text-slate-600">00</div>
+                        </div>
+                        <button id="btn-confirm-1" disabled class="shelf-btn-disabled">CONFIRMAR RETIRADA</button>
+                    </div>
+
+                    <!-- Balda 2 -->
+                    <div id="shelf-2" class="shelf-card">
+                        <div id="led-bar-2" class="led-bar-off"></div>
+                        <div class="flex justify-between items-start mt-2">
+                            <div>
+                                <span class="text-xs font-mono text-slate-400">UBICACIÓN A-2</span>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Placas Micro ESP32</h4>
+                            </div>
+                            <span class="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700" id="indicator-dot-2"></span>
+                        </div>
+                        <div class="my-3 flex items-center justify-between bg-slate-100 dark:bg-black/60 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <div class="text-xs font-mono text-slate-500 dark:text-slate-400">CANTIDAD:</div>
+                            <div id="display-num-2" class="font-mono text-2xl font-extrabold text-slate-400 dark:text-slate-600">00</div>
+                        </div>
+                        <button id="btn-confirm-2" disabled class="shelf-btn-disabled">CONFIRMAR RETIRADA</button>
+                    </div>
+
+                    <!-- Balda 3 -->
+                    <div id="shelf-3" class="shelf-card">
+                        <div id="led-bar-3" class="led-bar-off"></div>
+                        <div class="flex justify-between items-start mt-2">
+                            <div>
+                                <span class="text-xs font-mono text-slate-400">UBICACIÓN A-3</span>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Fuente 24V DinRail</h4>
+                            </div>
+                            <span class="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700" id="indicator-dot-3"></span>
+                        </div>
+                        <div class="my-3 flex items-center justify-between bg-slate-100 dark:bg-black/60 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <div class="text-xs font-mono text-slate-500 dark:text-slate-400">CANTIDAD:</div>
+                            <div id="display-num-3" class="font-mono text-2xl font-extrabold text-slate-400 dark:text-slate-600">00</div>
+                        </div>
+                        <button id="btn-confirm-3" disabled class="shelf-btn-disabled">CONFIRMAR RETIRADA</button>
+                    </div>
+
+                    <!-- Balda 4 -->
+                    <div id="shelf-4" class="shelf-card">
+                        <div id="led-bar-4" class="led-bar-off"></div>
+                        <div class="flex justify-between items-start mt-2">
+                            <div>
+                                <span class="text-xs font-mono text-slate-400">UBICACIÓN B-1</span>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Sensores Infrarrojos</h4>
+                            </div>
+                            <span class="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700" id="indicator-dot-4"></span>
+                        </div>
+                        <div class="my-3 flex items-center justify-between bg-slate-100 dark:bg-black/60 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <div class="text-xs font-mono text-slate-500 dark:text-slate-400">CANTIDAD:</div>
+                            <div id="display-num-4" class="font-mono text-2xl font-extrabold text-slate-400 dark:text-slate-600">00</div>
+                        </div>
+                        <button id="btn-confirm-4" disabled class="shelf-btn-disabled">CONFIRMAR RETIRADA</button>
+                    </div>
+
+                    <!-- Balda 5 -->
+                    <div id="shelf-5" class="shelf-card">
+                        <div id="led-bar-5" class="led-bar-off"></div>
+                        <div class="flex justify-between items-start mt-2">
+                            <div>
+                                <span class="text-xs font-mono text-slate-400">UBICACIÓN B-2</span>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Tiras LED RGB 12V</h4>
+                            </div>
+                            <span class="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700" id="indicator-dot-5"></span>
+                        </div>
+                        <div class="my-3 flex items-center justify-between bg-slate-100 dark:bg-black/60 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <div class="text-xs font-mono text-slate-500 dark:text-slate-400">CANTIDAD:</div>
+                            <div id="display-num-5" class="font-mono text-2xl font-extrabold text-slate-400 dark:text-slate-600">00</div>
+                        </div>
+                        <button id="btn-confirm-5" disabled class="shelf-btn-disabled">CONFIRMAR RETIRADA</button>
+                    </div>
+
+                    <!-- Balda 6 -->
+                    <div id="shelf-6" class="shelf-card">
+                        <div id="led-bar-6" class="led-bar-off"></div>
+                        <div class="flex justify-between items-start mt-2">
+                            <div>
+                                <span class="text-xs font-mono text-slate-400">UBICACIÓN B-3</span>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Cajas Cartón Reforzado</h4>
+                            </div>
+                            <span class="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700" id="indicator-dot-6"></span>
+                        </div>
+                        <div class="my-3 flex items-center justify-between bg-slate-100 dark:bg-black/60 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <div class="text-xs font-mono text-slate-500 dark:text-slate-400">CANTIDAD:</div>
+                            <div id="display-num-6" class="font-mono text-2xl font-extrabold text-slate-400 dark:text-slate-600">00</div>
+                        </div>
+                        <button id="btn-confirm-6" disabled class="shelf-btn-disabled">CONFIRMAR RETIRADA</button>
+                    </div>
+                </div>
+
+                <!-- Terminal de Logs / Consola -->
+                <div class="bg-slate-900 rounded-xl p-4 font-mono text-xs border border-slate-800 text-slate-300">
+                    <div class="flex justify-between text-slate-500 border-b border-slate-800 pb-2 mb-2">
+                        <span>CONSOLE LOG / HARDWARE BUS RS485</span>
+                        <span>SGA PROTOCOL v2.1</span>
+                    </div>
+                    <div id="console-logs" class="space-y-1 h-20 overflow-y-auto">
+                        <p class="text-slate-500">> Sistema iniciado. Bus de comunicación preparado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 5. ALINEACIÓN CON ODS Y SOSTENIBILIDAD     -->
+    <!-- ========================================== -->
+    <section id="ods" class="py-16 bg-white dark:bg-slate-950 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Alineados con la Agenda 2030 (ODS)</h2>
+                <p class="mt-4 text-slate-600 dark:text-slate-400">Sellos de Desarrollo Sostenible incorporados en la arquitectura técnica de EcoPickLed.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- ODS 9 -->
+                <div class="ods-card border-amber-300 dark:border-amber-500/30">
+                    <div class="ods-badge bg-amber-500 text-white">9</div>
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">Industria & Innovación</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Automatización electrónica con hardware de bajo consumo e infraestructura Cloud.</p>
+                </div>
+
+                <!-- ODS 12 -->
+                <div class="ods-card border-amber-400 dark:border-amber-600/30">
+                    <div class="ods-badge bg-amber-600 text-white">12</div>
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">Consumo Responsable</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Cero uso de papel impreso en listas de picking y reutilización de componentes.</p>
+                </div>
+
+                <!-- ODS 13 -->
+                <div class="ods-card border-emerald-300 dark:border-emerald-500/30">
+                    <div class="ods-badge bg-emerald-600 text-white">13</div>
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">Acción por el Clima</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Tiras LED de ultra baja potencia y optimización de rutas de desplazamiento.</p>
+                </div>
+
+                <!-- ODS 17 -->
+                <div class="ods-card border-sky-300 dark:border-sky-500/30">
+                    <div class="ods-badge bg-sky-700 text-white">17</div>
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">Alianzas Estratégicas</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Integración abierta con distribuidores de hardware y sistemas SGA locales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 6. CALCULADORA DE RETORNO DE INVERSIÓN (ROI)-->
+    <!-- ========================================== -->
+    <section id="calculadora" class="py-20 bg-bgLight dark:bg-[#0B0F17] relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-emerald-500/30 rounded-3xl p-8 md:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-logoEco dark:text-emerald-400 font-bold text-sm uppercase tracking-wider font-mono">SIMULADOR FINANCIERO EIE</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mt-2">Calcula tu Ahorro de Costes</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">Ajusta los datos de tu almacén para estimar el retorno económico anual.</p>
+                </div>
+
+                <!-- Controles Deslizantes / Inputs -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">Nº Operarios</label>
+                            <span id="val-operators" class="font-mono text-sm font-bold text-logoEco dark:text-emerald-400">5 operarios</span>
+                        </div>
+                        <input type="range" id="input-operators" min="1" max="50" value="5" class="w-full h-2 bg-slate-200 dark:bg-slate-900 rounded-lg appearance-none cursor-pointer accent-logoEco dark:accent-emerald-400">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">Horas Picking / Día</label>
+                            <span id="val-hours" class="font-mono text-sm font-bold text-logoPick dark:text-sky-400">6.0 hrs/día</span>
+                        </div>
+                        <input type="range" id="input-hours" min="1" max="8" step="0.5" value="6" class="w-full h-2 bg-slate-200 dark:bg-slate-900 rounded-lg appearance-none cursor-pointer accent-logoPick dark:accent-sky-400">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">Coste Hora (€)</label>
+                            <span id="val-cost" class="font-mono text-sm font-bold text-amber-600 dark:text-amber-400">15 €/h</span>
+                        </div>
+                        <input type="range" id="input-cost" min="10" max="40" value="15" class="w-full h-2 bg-slate-200 dark:bg-slate-900 rounded-lg appearance-none cursor-pointer accent-amber-500 dark:accent-amber-400">
+                    </div>
+                </div>
+
+                <!-- Resultados Totales -->
+                <div class="grid md:grid-cols-2 gap-6 bg-emerald-50/50 dark:bg-slate-900/80 p-6 rounded-2xl border border-emerald-200 dark:border-slate-700">
+                    <div class="text-center border-b md:border-b-0 md:border-r border-emerald-200 dark:border-slate-800 pb-4 md:pb-0 md:pr-4">
+                        <span class="text-slate-600 dark:text-slate-400 text-xs font-bold uppercase">Ahorro Mensual Estimado</span>
+                        <div id="ahorroMensual" class="text-4xl font-extrabold text-logoEco dark:text-emerald-400 mt-2 font-mono">4.365 €</div>
+                        <span class="text-slate-500 text-xs mt-1 block">(Tiempo ganado + 90% menos errores)</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-slate-600 dark:text-slate-400 text-xs font-bold uppercase">Ahorro Anual Total</span>
+                        <div id="ahorroAnual" class="text-4xl font-extrabold text-logoPick dark:text-sky-400 mt-2 font-mono">52.380 €</div>
+                        <span class="text-slate-500 text-xs mt-1 block">Retorno estimado de inversión &lt; 6 meses</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 7. CONTACTO Y PRESUPUESTOS                 -->
+    <!-- ========================================== -->
+    <section id="contacto" class="py-20 relative bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/10 text-logoEco dark:text-emerald-400 text-xs font-mono font-bold border border-emerald-200 dark:border-emerald-500/30 uppercase tracking-widest">
+                        CONTACTO TÉCNICO
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Solicita tu Estudio de Almacén</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Cotización adaptada al número de baldas, dimensiones de estanterías y requisitos de tu nave industrial.
+                    </p>
+
+                    <div class="space-y-4 pt-4 font-mono text-sm">
+                        <div class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-slate-900 flex items-center justify-center text-logoEco dark:text-emerald-400 border border-emerald-200 dark:border-slate-800">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 dark:text-slate-500">Email Directo</div>
+                                <div class="font-bold">contacto@ecopickled.es</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+                            <div class="w-10 h-10 rounded-lg bg-sky-50 dark:bg-slate-900 flex items-center justify-center text-logoPick dark:text-sky-400 border border-sky-200 dark:border-slate-800">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 dark:text-slate-500">Taller y Laboratorio</div>
+                                <div class="font-bold">CFGS Mantenimiento Electrónico</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="bg-bgLight dark:bg-slate-900/90 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg">
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-2">NOMBRE Y APELLIDOS *</label>
+                                    <input type="text" required placeholder="Ej. Carlos García" class="form-input">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-2">EMPRESA / ALMACÉN *</label>
+                                    <input type="text" required placeholder="Ej. Logística S.L." class="form-input">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-2">CORREO ELECTRÓNICO *</label>
+                                    <input type="email" required placeholder="ejemplo@empresa.com" class="form-input">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-2">Nº BALDAS / POSICIONES</label>
+                                    <input type="number" placeholder="Ej. 120 ubicaciones" class="form-input">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono font-bold text-slate-700 dark:text-slate-300 mb-2">DETALLES DEL PROYECTO</label>
+                                <textarea rows="3" placeholder="Describe tipo de producto o almacén..." class="form-input"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-logoEco to-logoPick text-white font-bold text-sm hover:opacity-90 shadow-lg shadow-logoEco/20 transition-all cursor-pointer">
+                                <i class="fa-solid fa-paper-plane mr-2"></i> Enviar Solicitud de Cotización
+                            </button>
+                        </form>
+
+                        <div id="form-success-msg" class="hidden mt-4 p-4 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 border border-emerald-300 dark:border-emerald-500/40 text-logoEco dark:text-emerald-400 text-sm text-center font-mono font-bold">
+                            <i class="fa-solid fa-circle-check mr-2"></i> ¡Solicitud enviada correctamente! Nos pondremos en contacto muy pronto.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 8. PIE DE PÁGINA (FOOTER)                  -->
+    <!-- ========================================== -->
+    <footer class="bg-slate-900 text-slate-400 py-8 text-xs text-center font-mono">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-bold text-white">EcoPickLed — Soluciones de Logística Inteligente Sostenible</p>
+            <p class="mt-2 text-slate-500">Módulo de Empresa e Iniciativa Emprendedora (EIE) | CFGS Mantenimiento Electrónico &copy; 2026</p>
+        </div>
+    </footer>
+
+    <!-- Archivo JS Local -->
+    <script src="script.js"></script>
+</body>
+</html>
